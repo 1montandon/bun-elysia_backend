@@ -1,14 +1,17 @@
 import { defineConfig } from 'drizzle-kit'
 
-if(!process.env.DB_FILE_NAME){
+if(!process.env.DATABASE_URL){
     throw new Error('the DATABASE_URL is required')
 }
 
 export default defineConfig({
-    dialect: 'sqlite',
+    dialect: 'postgresql',
     dbCredentials: {
-        url: process.env.DB_FILE_NAME,
+        url: process.env.DATABASE_URL,
     },
     out: './drizzle',
-    schema: './src/db/schema.ts',
+    schema: [
+        './src/db/schema.ts',
+        './src/db/auth-schema.ts'
+    ],
 })

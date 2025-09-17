@@ -1,17 +1,9 @@
-import { password } from "bun";
-import { int, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { pgTable, serial, text, boolean, integer } from "drizzle-orm/pg-core";
 
-export const users = sqliteTable("users", {
-  id: int().primaryKey({ autoIncrement: true }),
-  name: text().notNull(),
-  email: text().notNull().unique(),
-  password: text().notNull()
-});
-
-export const todos = sqliteTable("todos", {
-  id: int().primaryKey({ autoIncrement: true }),
-  name: text().notNull(),
-  description: text().notNull(),
-  done: integer({ mode: "boolean" }).default(false).notNull(),
-  userId: int().notNull().references(() => users.id)
+export const todos = pgTable("todos", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  done: boolean("done").default(false).notNull(),
+  // userId: integer("user_id").notNull().references(() => users.id)
 });

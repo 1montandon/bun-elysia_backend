@@ -1,6 +1,11 @@
 POST http://localhost:3000/auth/login
-Content-Type: application/json
 
 {
-    "email": "e"
+    "username": "testandousares",
+    "email": "e",
+    "password": "teste"
 }
+
+###
+
+GET http://localhost:3000/d

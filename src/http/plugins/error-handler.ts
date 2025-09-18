@@ -3,9 +3,12 @@ import { Elysia } from "elysia";
 import { AppError } from "../utils/error";
 
 export const errorHandler = () =>
-  new Elysia().onError(({ code, error }) => {
+  new Elysia().onError(({ code, error , set}) => {
+        console.error(error)
+
     // Handle your custom AppError
     if (error instanceof AppError) {
+      set.status = error.status
       return {
         status: error.status,
         message: error.message,
@@ -14,6 +17,7 @@ export const errorHandler = () =>
 
     // Handle validation errors (TypeBox / Elysia)
     if (code === "VALIDATION") {
+      set.status = 400
       return {
         status: 400,
         message: "Validation failed",
@@ -23,6 +27,7 @@ export const errorHandler = () =>
 
     // Handle "not found" routes
     if (code === "NOT_FOUND") {
+      set.status = 404
       return {
         status: 404,
         message: "Route not found",
@@ -32,6 +37,6 @@ export const errorHandler = () =>
     // Fallback for anything else
     return {
       status: 500,
-      message: error?.message ?? "Internal server error",
+      message: "Internal server error",
     };
   });

@@ -1,6 +1,8 @@
-// Make sure to install the 'pg' package 
-import { drizzle } from 'drizzle-orm/node-postgres';
+// Make sure to install the 'postgres' package
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import { env } from '../env';
 
-export const db = drizzle(env.DATABASE_URL);
- 
+const queryClient = postgres(env.DATABASE_URL);
+export const db = drizzle({ client: queryClient });
+

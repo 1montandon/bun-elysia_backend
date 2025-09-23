@@ -3,9 +3,9 @@ services:
     image: postgres:17
     container_name: bun-auth-postgres
     environment:
-      POSTGRES_USER: auth
+      POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: docker
+      POSTGRES_DB: auth
     ports:
       - "5432:5432"
 #     volumes:

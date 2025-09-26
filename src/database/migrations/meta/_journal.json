@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1758332279156,
-      "tag": "0000_special_bloodaxe",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1758423894735,
-      "tag": "0001_living_silverclaw",
+      "when": 1758854141033,
+      "tag": "0000_sloppy_ted_forrester",
       "breakpoints": true
     }
   ]

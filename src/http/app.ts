@@ -4,6 +4,7 @@ import { z } from "zod";
 import { openapi } from '@elysiajs/openapi'
 import { betterAuthPlugin, OpenAPI } from "./plugins/better-auth";
 import { createTodoRoute } from "./routes/create-todo";
+import { getTodosRoute } from "./routes/get-todos";
 
 export const app = new Elysia()
   .use(errorHandler)
@@ -15,29 +16,4 @@ export const app = new Elysia()
   }))
   .use(betterAuthPlugin)
   .use(createTodoRoute)
-  .get("/", () => "Hello Elysia")
-  .get(
-    "/users/:id",
-    ({ params, user, session }) => {
-      const authenticatedUserName = user.name
-      const userId = params.id;
-
-      return { id: userId, name: "Eduardo" };
-    },
-    {
-      auth: true,
-      detail: {
-        summary: 'Buscar um usuario pelo id',
-        tags: ['users']
-      },
-      params: z.object({
-        id: z.string(),
-      }),
-      response: {
-        200: z.object({
-          id: z.string(),
-          name: z.string(),
-        }),
-      },
-    }
-  )
+  .use(getTodosRoute)

@@ -30,8 +30,8 @@ export const getTodosRoute = new Elysia({ prefix: "/todo" }).use(authMacro).get(
     // Always filter by user
     conditions.push(eq(schema.todos.userId, userId));
 
-    conditions.push(lte(schema.todos.startDate, startDateFilter)); 
-    conditions.push(gte(schema.todos.endDate, endDateFilter));   
+    conditions.push(lte(schema.todos.startDate, endDateFilter)); 
+    conditions.push(gte(schema.todos.endDate, startDateFilter));   
 
 
     const todos = await db
